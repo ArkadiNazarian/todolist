@@ -1,5 +1,5 @@
-import {View} from "./view";
-import { Container } from "./container";
+import {View} from "./View/view";
+import { Container } from "./Container/container";
 
 export function App(){
     let get_props = Container()

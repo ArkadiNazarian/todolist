@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { IFormValues, IProps } from "./model";
+import { IFormValues, IProps } from "../Model/model";
 import { useFormik } from 'formik';
 import *as yup from "yup";
 

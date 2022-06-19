@@ -15,5 +15,6 @@ export interface IFormValues {
     index: number;
 }
 
-
-
+export interface Mylist {
+    index: string
+}

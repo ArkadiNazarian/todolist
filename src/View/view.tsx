@@ -1,6 +1,13 @@
-import { IProps } from "./model";
+import { IProps } from "../Model/model";
+import { List } from "./list";
 
 export const View = (props: IProps) => {
+
+    const list = props.title.map((index) => (
+        <List index={index}/>
+    ))
+
+
     return (
         <div>
             <form onSubmit={props.action_add}>
@@ -17,12 +24,14 @@ export const View = (props: IProps) => {
                 <button
                     type="reset"
                     onClick={props.handler_discard}
-                    >
+                >
                     Discard
                 </button>
             </form>
             <div>
-                <p>{props.title}</p>
+                {
+                    list
+                }
             </div>
         </div>
     )
