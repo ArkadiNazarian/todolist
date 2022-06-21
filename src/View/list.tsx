@@ -1,7 +1,7 @@
 import { Mylist } from "../Model/model"
 
-export const List = (props:Mylist) => {
+export const List = (props: Mylist) => {
     return (
-        <p>{props.index}</p>
+            <p className="tw-text-2xl">{props.index}<br /></p>
     )
 }
