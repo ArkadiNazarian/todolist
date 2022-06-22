@@ -3,8 +3,8 @@ import { List } from "./list";
 
 export const View = (props: IProps) => {
 
-    const list = props.title.map((index) => (
-        <List index={index} key={index} />
+    const list = props.items.map((value,index) => (
+        <List value={value} key={index} id={index}/>
     ))
 
 

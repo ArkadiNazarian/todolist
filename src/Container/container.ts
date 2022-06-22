@@ -35,7 +35,7 @@ export const Container = () => {
     });
     return {
         index: current_index,
-        title: current_list,
+        items: current_list,
         action_add: formik.handleSubmit,
         form_data: formik.values,
         form_errors: formik.errors,

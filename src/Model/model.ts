@@ -2,7 +2,7 @@ import { FormikErrors } from "formik";
 
 export interface IProps {
     index: number;
-    title: string[];
+    items: string[];
     action_add: () => void,
     form_data: IFormValues,
     form_errors: FormikErrors<IFormValues>,
@@ -15,6 +15,7 @@ export interface IFormValues {
     index: number;
 }
 
-export interface Mylist {
-    index: string
+export interface MyItem {
+    value: string;
+    id:number;
 }

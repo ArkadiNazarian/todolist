@@ -1,7 +1,7 @@
-import { Mylist } from "../Model/model"
+import { MyItem } from "../Model/model"
 
-export const List = (props: Mylist) => {
+export const List = (props: MyItem) => {
     return (
-            <p className="tw-text-2xl">{props.index}<br /></p>
+            <p className="tw-text-2xl">{props.id+1}. {props.value}<br /></p>
     )
 }
