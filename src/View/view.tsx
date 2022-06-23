@@ -4,7 +4,7 @@ import { List } from "./list";
 export const View = (props: IProps) => {
 
     const list = props.items.map((value,index) => (
-        <List value={value} key={index} id={index}/>
+        <List value={value} key={index} id={index} handler_remove={props.handler_discard_items}/>
     ))
 
 

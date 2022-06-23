@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { IFormValues, IProps } from "../Model/model";
+import { IFormValues, IProps, MyItem } from "../Model/model";
 import { useFormik } from 'formik';
 import *as yup from "yup";
 
 export const Container = () => {
 
-    const [current_index, set_current_index] = useState<number>(0)
+
     const [current_list, set_current_list] = useState<string[]>([])
 
     const validation_schema = yup.object().shape({
@@ -19,14 +19,20 @@ export const Container = () => {
 
     const action_add = (values: IFormValues) => {
         let newList = [...current_list];
-        set_current_index(current_index + 1);
         newList.push(values.title);
         set_current_list(newList);
         console.log(newList);
-        console.log(current_index);
+
     }
     const handler_discard = () => {
         set_current_list([])
+    }
+
+    const discard_items = (props: MyItem) => {
+        const list = [...current_list]
+        const removed_list = list.filter(item => item !== String(props.id))
+        set_current_list(removed_list)
+        console.log(removed_list)
     }
     const formik = useFormik({
         initialValues: initial_value,
@@ -34,12 +40,12 @@ export const Container = () => {
         onSubmit: action_add
     });
     return {
-        index: current_index,
         items: current_list,
         action_add: formik.handleSubmit,
         form_data: formik.values,
         form_errors: formik.errors,
         handleChange: formik.handleChange,
-        handler_discard
+        handler_discard,
+        handler_discard_items: discard_items
     } as IProps
 }
