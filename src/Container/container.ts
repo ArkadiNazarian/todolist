@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { IFormValues, IProps, MyItem } from "../Model/model";
+import { IFormValues, IProps } from "../Model/model";
 import { useFormik } from 'formik';
 import *as yup from "yup";
 
@@ -13,27 +13,27 @@ export const Container = () => {
     });
 
     const initial_value = {
-        title: "",
-        index: 0
+        title: ""
     } as IFormValues
 
     const action_add = (values: IFormValues) => {
         let newList = [...current_list];
         newList.push(values.title);
         set_current_list(newList);
-        console.log(newList);
 
     }
     const handler_discard = () => {
         set_current_list([])
-    }
+    };
 
-    const discard_items = (props: MyItem) => {
-        const list = [...current_list]
-        const removed_list = list.filter(item => item !== String(props.id))
+    const remove_item = (id: number) => {
+        const list = [...current_list];
+        const removed_list = list.filter((value,index)=>(
+            index !==id
+        ))
         set_current_list(removed_list)
-        console.log(removed_list)
-    }
+    };
+
     const formik = useFormik({
         initialValues: initial_value,
         validationSchema: validation_schema,
@@ -46,6 +46,6 @@ export const Container = () => {
         form_errors: formik.errors,
         handleChange: formik.handleChange,
         handler_discard,
-        handler_discard_items: discard_items
+        handler_remove_item: remove_item
     } as IProps
-}
+};

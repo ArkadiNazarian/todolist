@@ -7,7 +7,7 @@ export interface IProps {
     form_errors: FormikErrors<IFormValues>,
     handleChange: () => void,
     handler_discard: () => void,
-    handler_discard_items:()=>void
+    handler_remove_item:(value:number)=>void
 }
 
 export interface IFormValues {
@@ -17,5 +17,6 @@ export interface IFormValues {
 export interface MyItem {
     value: string;
     id:number;
-    handler_remove:() => void
+    handler_remove:(value:number) => void;
+    handler_remove_item?:(value:number)=>void;
 }
