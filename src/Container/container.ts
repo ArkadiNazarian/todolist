@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { IFormValues, IProps } from "../Model/model";
 import { useFormik } from 'formik';
 import *as yup from "yup";
@@ -6,7 +6,7 @@ import *as yup from "yup";
 export const Container = () => {
 
 
-    const [current_list, set_current_list] = useState<string[]>([])
+    const [current_list, set_current_list] = useState<Array<string>>([])
 
     const validation_schema = yup.object().shape({
         title: yup.string().required(),
@@ -20,18 +20,21 @@ export const Container = () => {
         let newList = [...current_list];
         newList.push(values.title);
         set_current_list(newList);
-
+        localStorage.setItem("list", JSON.stringify(newList));
     }
+
     const handler_discard = () => {
         set_current_list([])
+        localStorage.setItem("list", JSON.stringify([]));
     };
 
     const remove_item = (id: number) => {
         const list = [...current_list];
-        const removed_list = list.filter((value,index)=>(
-            index !==id
+        const modified_list = list.filter((value, index) => (
+            index !== id
         ))
-        set_current_list(removed_list)
+        set_current_list(modified_list);
+        localStorage.setItem("list", JSON.stringify(modified_list));
     };
 
     const formik = useFormik({
@@ -39,6 +42,13 @@ export const Container = () => {
         validationSchema: validation_schema,
         onSubmit: action_add
     });
+
+    useEffect(() => {
+        const modified_list= JSON.parse(localStorage.getItem("list")!)
+        set_current_list(modified_list)
+    }, [])
+
+    
     return {
         items: current_list,
         action_add: formik.handleSubmit,
